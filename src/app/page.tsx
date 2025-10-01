@@ -1,103 +1,113 @@
-import Image from "next/image";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+import { Button } from "@/components/ui/button"
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+export default function Home(){
+    return(
+        <div className="w-full h-screen flex items-center justify-center flex-col">
+            <div className="pb-10 pt-10">
+                <div className="w-200 h-auto bg-gray-300 flex items-center justify-center flex-col rounded-md ">
+                    <div className="p-5">
+                        <h1 className="text-3xl">O que é o Blastofinder?</h1>
+                    </div>
+                    <div className="p-5 text-justify text-xl">
+                        <p>
+                            O BlastoFinder é uma ferramenta que visa auxiliar todos os microscopistas na identificação 
+                            de blastos em exames de sangue de diversos pacientes, um blasto é uma célula em estágio inicial 
+                            de maturação que quando encontrada na corrente sanguínea pode ser um indício de Leucemia.
+                            A ferramenta é desenvolvida por meio de um projeto de extensão por alunos da Universidade 
+                            Federal de Rondônia em parceria com profissionais da Fundação Oswaldo Cruz e utiliza de algoritmos 
+                            de inteligência artificial e visão computacional para fazer a detecção e classificação dos blastos 
+                            em imagens retiradas de microscópios.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className="pb-10">
+                <div className="w-200 h-auto bg-gray-300 flex items-center justify flex-col rounded-md">
+                    <Accordion className="w-auto" type="single" collapsible>
+                        <AccordionItem className="w-auto" value="item-1">
+                            <AccordionTrigger className="text-lg">Login / Cadastro</AccordionTrigger>
+                            <AccordionContent className="w-auto">
+                                <Tabs className=" flex items-center justify-center" defaultValue="login">
+                                    <TabsList>
+                                    <TabsTrigger value="login">Login</TabsTrigger>
+                                    <TabsTrigger value="password">Cadastro</TabsTrigger>
+                                    </TabsList>
+                                    <TabsContent value="login">
+                                        <Card className=" w-100 flex justify-center items-center">
+                                            <CardHeader className="w-auto flex items-center justify-center">
+                                            <CardDescription className="text-lg text-black font-bold flex justify-center">
+                                                Insira suas credenciais
+                                            </CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="grid gap-6  w-auto">
+                                            <div className="grid gap-3 w-80">
+                                                <Label htmlFor="tabs-demo-login" className="text-md">E-mail</Label>
+                                                <Input id="tabs-demo-login" className="rounded-4xl" />
+                                            </div>
+                                            <div className="grid gap-3">
+                                                <Label htmlFor="tabs-demo-password">Senha</Label>
+                                                <Input id="tabs-demo-password" type="password" className="rounded-4xl" />
+                                            </div>
+                                            </CardContent>
+                                            <CardFooter>
+                                            <Button className="bg-purple-800 rounded-4xl w-80 text-xl flex items-center justify-center hover:bg-purple-900 cursor-pointer">Login</Button>
+                                            </CardFooter>
+                                        </Card>
+                                    </TabsContent>
+                                    <TabsContent value="password">
+                                        <Card>
+                                            <CardHeader>
+                                            <CardTitle>Password</CardTitle>
+                                            <CardDescription>
+                                                Change your password here. After saving, you&apos;ll be logged
+                                                out.
+                                            </CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="grid gap-6">
+                                            <div className="grid gap-3">
+                                                <Label htmlFor="tabs-demo-current">Current password</Label>
+                                                <Input id="tabs-demo-current" type="password" />
+                                            </div>
+                                            <div className="grid gap-3">
+                                                <Label htmlFor="tabs-demo-new">New password</Label>
+                                                <Input id="tabs-demo-new" type="password" />
+                                            </div>
+                                            </CardContent>
+                                            <CardFooter>
+                                            <Button>Save password</Button>
+                                            </CardFooter>
+                                        </Card>
+                                        </TabsContent>
+                                    </Tabs>
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
+
+                </div>
+            </div>
+
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    )
 }
