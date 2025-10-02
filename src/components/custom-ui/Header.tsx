@@ -11,7 +11,7 @@ import {
 
 export default function Header(){
     return(
-        <div className="w-full h-30 bg-purple-800 flex items-center justify-between pr-10 pl-10" >
+        <div className="w-full h-20 bg-purple-800 flex items-center justify-between px-20" >
             <div className="w-20 h-20 bg-red-300 flex items-center justify-center rounded-md">
                 Logo
             </div>
@@ -33,9 +33,6 @@ export default function Header(){
                     </NavigationMenuList>
                 </NavigationMenu>
             </div>
-                <div className="w-20 h-20 bg-purple-800 flex items-center justify-center">
-                    
-                </div>
         </div>
     );
 }

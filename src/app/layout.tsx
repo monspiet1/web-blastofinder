@@ -21,13 +21,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Header></Header>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        {children}
+        <div  className="flex flex-col min-h-screen">
+          <Header/>
+            <main className="flex-1">{children}</main>
+          <Footer/>
+        </div>
       </body>
-      <Footer></Footer>
     </html>
   );
 }
