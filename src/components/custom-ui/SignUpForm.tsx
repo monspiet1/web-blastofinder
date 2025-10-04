@@ -29,22 +29,28 @@ import { useRouter } from "next/navigation";
 import { redirect } from "next/dist/server/api-utils"
 import { useState } from "react"
 import { Spinner } from "../ui/spinner"
+import { Birth } from "./Birth"
 
 import { createAuthClient } from "better-auth/client";
+import { occupation } from "../../../db/schema"
  
 const formSchema = z.object({ // verifica se os valores inseridos batem para fazer a autenticação correta
+  name: z.string().min(3),
   email: z.string().email(),
   password: z.string().min(8),
+  occupation: z.string().min(3),
+  birth: z.string()
 })
 
-type LoginFormProps = React.ComponentProps<"form"> & {switchTab: () => void}
+
+type SignUpFormProps = React.ComponentProps<"form"> & {switchTab: () => void}
 
 
-export function LoginForm({
+export function SignUpForm({
   className,
   switchTab,
   ...props 
-} : LoginFormProps) {
+} : SignUpFormProps) {
 
   const authClient = createAuthClient();
 
@@ -57,6 +63,9 @@ export function LoginForm({
     defaultValues: {
       email: "",
       password: "",
+      name: "",
+      occupation: "Pesquisador",
+      birth: ""
     },
   })
 
@@ -70,9 +79,11 @@ export function LoginForm({
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true) // quando o botao for clicado o icone de loading aparece
-    const {success, message} = await signIn(values.email, values.password)
+    console.log("Data: ",values.birth)
+    const {success, message} = await signUp(values.email, values.password, values.name, values.birth , values.occupation)
 
     if(success){
+       
       toast.success(message as string)
       router.push('/analysis')
       
@@ -85,14 +96,29 @@ export function LoginForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" id="register">
         <FieldGroup>
           <div className="flex flex-col items-center gap-1 text-center">
-            <h1 className="text-2xl font-bold">Entre em sua conta</h1>
+            <h1 className="text-2xl font-bold">Cadastre seu dados</h1>
             <p className="text-muted-foreground text-sm text-balance">
-              Insira seu email abaixo para entrar em sua conta
+              Insira seus dados abaixo para criar sua conta
             </p>
           </div>
+          <Field>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nome</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ex: José da Silva" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+          </Field>
           <Field>
               <FormField
                 control={form.control}
@@ -101,13 +127,45 @@ export function LoginForm({
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="m@example.com" {...field} />
+                      <Input placeholder="Ex: jose@email.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
           </Field>
+          <div className="grid grid-cols-2 gap-4">
+            <Field>
+              <FormField
+                control={form.control}
+                name="birth"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nascimento</FormLabel>
+                    <FormControl>
+                      <Birth value={field.value} onChange={field.onChange}/>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </Field>
+            <Field>
+              <FormField
+                control={form.control}
+                name="occupation"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Ocupação</FormLabel>
+                    <FormControl>
+                      <Input placeholder="m@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </Field>
+          </div>
           <div className="grid gap-3">
             <Field>
               <FormField
@@ -123,14 +181,6 @@ export function LoginForm({
                   </FormItem>
                 )}
               />
-              <div className="flex justify-end">
-                <a
-                  href="#"
-                  className="text-sm underline-offset-4 hover:underline"
-                >
-                  Esqueceu sua senha?
-                </a>
-              </div>
             </Field>
           </div>
           <Field>
@@ -138,7 +188,7 @@ export function LoginForm({
               {isLoading ? (
                 <Spinner className="size-4"/> 
               ) : (
-                "Entrar"
+                "Cadastrar"
               )}
             </Button>
           </Field>
@@ -154,9 +204,9 @@ export function LoginForm({
               Entre com Google
             </Button>
             <FieldDescription className="text-center">
-              Não tem conta?{" "}
+              Possui conta?{" "}
               <a href="#" className="underline underline-offset-4" onClick={switchTab}>
-                Cadastre-se
+                Entre
               </a>
             </FieldDescription>
           </Field>

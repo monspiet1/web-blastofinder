@@ -12,9 +12,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-export function Birth() {
+type BirthProps = {
+  value: string; // agora é string
+  onChange: (dateString: string) => void;
+};
+
+export function Birth({ value, onChange }: BirthProps) {
   const [open, setOpen] = React.useState(false)
   const [date, setDate] = React.useState<Date | undefined>(undefined)
+   const selectedDate = value ? new Date(value) : null;
 
   return (
     <div className="flex flex-col gap-3">
@@ -23,7 +29,9 @@ export function Birth() {
           <Button
             variant="outline"
             id="date"
-            className="w-full justify-between font-normal rounded-4xl"
+            className={`w-full justify-between font-normal ${
+              date ? "text-black" : "text-muted-foreground"
+            }`}
           >
             {date ? date.toLocaleDateString() : "Escolha a data"}
             <ChevronDownIcon />
@@ -32,12 +40,13 @@ export function Birth() {
         <PopoverContent className="w-auto overflow-hidden p-0" align="start">
           <Calendar
             mode="single"
-            selected={date}
+            selected={selectedDate ?? undefined}
             captionLayout="dropdown"
-            onSelect={(date) => {
-              setDate(date)
-              setOpen(false)
-            }}
+          onSelect={(date) => {
+            setDate(date)              // mantém o estado local para exibir no botão
+            onChange(date ? date.toISOString() : "") // atualiza o form com string ISO
+            setOpen(false)             // fecha o popover
+          }}
           />
         </PopoverContent>
       </Popover>

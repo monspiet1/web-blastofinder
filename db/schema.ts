@@ -17,6 +17,7 @@ export const user = pg.pgTable("user", {
     .defaultNow()
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
+ birthday: pg.text()
 });
 
 export const session =  pg.pgTable("session", {

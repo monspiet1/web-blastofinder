@@ -1,8 +1,21 @@
+"use client"
+
 import { GalleryVerticalEnd } from "lucide-react"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
 
 import { LoginForm } from "@/components/custom-ui/LoginForm"
+import { SignUpForm } from "@/components/custom-ui/SignUpForm"
+import { useState } from "react"
 
-export default function LoginPage() {
+export default function Home() {
+
+  const [isRegistred, setIsRegistred] = useState("login")
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -11,20 +24,32 @@ export default function LoginPage() {
 
           </a>
         </div>
-        <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-xs">
-            <LoginForm />
-          </div>
+        <div className="flex flex-1 w-full flex-col gap-6 items-center justify-center">
+            <Tabs  value={isRegistred} onValueChange={setIsRegistred} className="w-[400px]">
+              <div className="flex items-center justify-center">
+                <TabsList>
+                <TabsTrigger value="login" className="cursor-pointer">Login</TabsTrigger>
+                <TabsTrigger value="register" className="cursor-pointer">Cadastro</TabsTrigger>
+              </TabsList>
+              </div>
+              <TabsContent value="login" className="pt-5">
+                <LoginForm switchTab={() => setIsRegistred("register")}/>
+              </TabsContent>
+              <TabsContent value="register" className="pt-5">
+                <SignUpForm switchTab={() => setIsRegistred("login")}/>
+              </TabsContent>
+            </Tabs>
+          
         </div>
       </div>
       <div className="bg-white relative hidden lg:block ">
-            <div className="w-full h-screen flex items-start justify-start flex-col py-20 rounded-md pr-10 overflow-auto">
+            <div className="w-full h-screen flex items-start justify-start flex-col pb-10 pt-30 rounded-md pr-10 overflow-auto">
                     <div className="px-5">
-                            <h1 className="text-3xl">O que é o Blastofinder?</h1>
+                            <h1 className="text-3xl font-bold">O que é o Blastofinder?</h1>
                     </div>
                     <div className="py-2 px-5 text-justify text-lg">
                             <p>
-                                O BlastoFinder é uma ferramenta que visa auxiliar todos os microscopistas na identificação 
+                                O Blastofinder é uma ferramenta que visa auxiliar todos os microscopistas na identificação 
                                 de blastos em exames de sangue de diversos pacientes, um blasto é uma célula em estágio inicial 
                                 de maturação que quando encontrada na corrente sanguínea pode ser um indício de Leucemia.
                                 A ferramenta é desenvolvida por meio de um projeto de extensão por alunos da Universidade 
@@ -35,9 +60,9 @@ export default function LoginPage() {
                             </p>
                     </div>
                     <div className="px-5 pt-5">
-                            <h1 className="text-3xl">Universidade Federal de Rondônia</h1>
+                            <h1 className="text-3xl font-bold">Universidade Federal de Rondônia</h1>
                     </div>
-                    <div className="py-2 px-5 text-justify text-lg">
+                    <div className="py-2 px-5 text-justify text-lg ">
                             <p>
                                 A Universidade Federal de Rondônia (UNIR) é uma instituição pública de ensino superior localizada em Porto Velho, Rondônia. 
                                 Fundada em 1989, a UNIR tem como missão promover a educação, a pesquisa e a extensão em diversas áreas do conhecimento, 
@@ -51,7 +76,7 @@ export default function LoginPage() {
                             </p>
                     </div>
                     <div className="px-5 pt-5">
-                            <h1 className="text-3xl">Fundação Oswaldo Cruz</h1>
+                            <h1 className="text-3xl font-bold">Fundação Oswaldo Cruz</h1>
                     </div>
                     <div className="py-2 px-5 text-justify text-lg">
                             <p>
