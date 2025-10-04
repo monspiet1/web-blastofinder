@@ -19,16 +19,16 @@ export default function Header(){
                 <NavigationMenu>
                     <NavigationMenuList className="w-120 flex justify-between">
                         <NavigationMenuItem>
-                            <NavigationMenuLink className="px-6 py-1 rounded-4xl hover:bg-purple-900 hover:text-bold hover:text-bold"><a href="../../app/pages/login" className="text-xl text-white">Início</a></NavigationMenuLink>
+                            <NavigationMenuLink className="px-6 py-1 rounded-4xl hover:bg-purple-900 hover:text-bold hover:text-bold text-xl" href="../../app/pages/login">Início</NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <NavigationMenuLink className="px-6 py-1 rounded-4xl hover:bg-purple-900 hover:text-white"><a href="../../app/pages/login" className="text-xl text-white">Sobre</a></NavigationMenuLink>
+                            <NavigationMenuLink className="px-6 py-1 rounded-4xl hover:bg-purple-900 hover:text-bold hover:text-bold text-xl " href="../../app/pages/login">Sobre</NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <NavigationMenuLink className="px-6 py-1 rounded-4xl hover:bg-purple-900 hover:text-white"><a href="../../app/pages/login" className="text-xl text-white">Ajuda</a></NavigationMenuLink>
+                            <NavigationMenuLink className="px-6 py-1 rounded-4xl hover:bg-purple-900 hover:text-bold hover:text-bold text-xl" href="../../app/pages/login">Detecção</NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <NavigationMenuLink className="px-6 py-1 rounded-4xl hover:bg-purple-900 hover:text-white"><a href="../../app/pages/login" className="text-xl text-white">Detecção</a></NavigationMenuLink>
+                            <NavigationMenuLink className="px-6 py-1 rounded-4xl hover:bg-purple-900 hover:text-bold hover:text-bold text-xl" href="../../app/pages/login">Sair</NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>
                 </NavigationMenu>
