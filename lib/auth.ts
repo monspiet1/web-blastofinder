@@ -12,6 +12,12 @@ export const auth = betterAuth({
         provider: "pg", // or "mysql", "sqlite"
         schema
     }),
+    session: {
+        cookieCache: {
+            enabled: true,
+            maxAge: 5 * 60 // Cache duration in seconds
+        }
+    },
     socialProviders: {
         google: { 
             clientId: process.env.GOOGLE_CLIENT_ID as string, 

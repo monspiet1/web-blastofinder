@@ -1,11 +1,12 @@
 "use server"
 
 import {auth} from "@lib/auth"
-import { error } from "console"
-import { success } from "zod"
-import { session, user } from "../db/schema"
+
+import {  user } from "../db/schema"
 import { db } from "../db/drizzle"
 import { eq, sql } from "drizzle-orm"
+import { cookies } from "next/headers"
+import { authClient } from "@lib/auth_client"
 
 export const signIn = async (email: string, password: string) => {
 
@@ -65,3 +66,5 @@ export const signUp = async (email: string, password: string, name: string, birt
             }
             };
 }
+
+

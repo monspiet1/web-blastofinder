@@ -27,10 +27,11 @@ import { z } from "zod"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation";
 import { redirect } from "next/dist/server/api-utils"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Spinner } from "../ui/spinner"
 
 import { createAuthClient } from "better-auth/client";
+import { getOccupations } from "../../../server/occupation"
  
 const formSchema = z.object({ // verifica se os valores inseridos batem para fazer a autenticação correta
   email: z.string().email(),
@@ -71,6 +72,7 @@ export function LoginForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true) // quando o botao for clicado o icone de loading aparece
     const {success, message} = await signIn(values.email, values.password)
+
 
     if(success){
       toast.success(message as string)

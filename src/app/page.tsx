@@ -10,9 +10,22 @@ import {
 
 import { LoginForm } from "@/components/custom-ui/LoginForm"
 import { SignUpForm } from "@/components/custom-ui/SignUpForm"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { getOccupations } from "../../server/occupation"
+
+import { authClient } from "@lib/auth_client"
 
 export default function Home() {
+
+  useEffect(() => {
+    async function fetchData() {
+      // Mesmo sendo importada, isso roda no servidor por trás dos panos
+      const data = authClient.useSession()
+      console.log("Sessão:", data)
+    }
+    fetchData()
+  }, [])
+
 
   const [isRegistred, setIsRegistred] = useState("login")
 

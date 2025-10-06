@@ -8,27 +8,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { getOccupations } from "../../../server/occupation";
+
+type Occupation = {
+  id: number
+  desc: string
+}
 
 export default function OccupationList() {
-  const [occupations, setOccupations] = useState<{id:number, description: string}[]>([]);
+  const [occupations, setOccupations] = useState<Occupation[]>([]);
+
 
   useEffect(() => {
-    fetch("/api/occupation") // se atentar ao nome das pastas, devem estar de acordo
-      .then(res => res.json())
-      .then(data => {
-        setOccupations(data)
-      });
-  }, []);
+      const fetchData = async () => {
+        const res = await getOccupations()
+        if (res.success && res.data) {
+          setOccupations(res.data)
+        } else {
+          console.error(res.message)
+        }
+      }
+
+      fetchData()
+  }, [])
 
   return (
     <Select>
-        <SelectTrigger className="w-full rounded-4xl text-black hover:bg-accent">
+        <SelectTrigger className="w-full text-black hover:bg-accent">
                 <SelectValue placeholder="Escolha a ocupação" />
         </SelectTrigger>
         <SelectContent>
-            {occupations.map((occ, i) => (
-            <SelectItem key={occ.id} value={occ.description}>
-                {occ.description} 
+            {occupations.map((occ) => (
+            <SelectItem key={occ.id} value={occ.desc}>
+                {occ.desc} 
             </SelectItem>
             ))}
         </SelectContent>

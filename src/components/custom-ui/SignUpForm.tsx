@@ -33,6 +33,7 @@ import { Birth } from "./Birth"
 
 import { createAuthClient } from "better-auth/client";
 import { occupation } from "../../../db/schema"
+import OccupationList from "./OccupationList"
  
 const formSchema = z.object({ // verifica se os valores inseridos batem para fazer a autenticação correta
   name: z.string().min(3),
@@ -158,7 +159,7 @@ export function SignUpForm({
                   <FormItem>
                     <FormLabel>Ocupação</FormLabel>
                     <FormControl>
-                      <Input placeholder="m@example.com" {...field} />
+                      <OccupationList/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
