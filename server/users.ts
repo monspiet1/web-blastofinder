@@ -5,8 +5,9 @@ import {auth} from "@lib/auth"
 import {  user } from "../db/schema"
 import { db } from "../db/drizzle"
 import { eq, sql } from "drizzle-orm"
-import { cookies } from "next/headers"
-import { authClient } from "@lib/auth_client"
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
+
 
 export const signIn = async (email: string, password: string) => {
 
@@ -66,5 +67,16 @@ export const signUp = async (email: string, password: string, name: string, birt
             }
             };
 }
+
+export const signOut = async () => {
+    const res = await auth.api.signOut({
+        headers: await headers(),
+    })
+
+
+    redirect("/")
+}
+
+
 
 

@@ -13,18 +13,8 @@ import { SignUpForm } from "@/components/custom-ui/SignUpForm"
 import { useEffect, useState } from "react"
 import { getOccupations } from "../../server/occupation"
 
-import { authClient } from "@lib/auth_client"
 
 export default function Home() {
-
-  useEffect(() => {
-    async function fetchData() {
-      // Mesmo sendo importada, isso roda no servidor por trás dos panos
-      const data = authClient.useSession()
-      console.log("Sessão:", data)
-    }
-    fetchData()
-  }, [])
 
 
   const [isRegistred, setIsRegistred] = useState("login")
@@ -56,7 +46,7 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-white relative hidden lg:block ">
-            <div className="w-full h-screen flex items-start justify-start flex-col pb-10 pt-30 rounded-md pr-10 overflow-auto">
+            <div className="w-full h-screen flex items-start justify-start flex-col pb-10 pt-10 rounded-md pr-10 overflow-auto">
                     <div className="px-5">
                             <h1 className="text-3xl font-bold">O que é o Blastofinder?</h1>
                     </div>

@@ -26,8 +26,8 @@ import {
 import { z } from "zod"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation";
-import { redirect } from "next/dist/server/api-utils"
-import { useEffect, useState } from "react"
+
+import {  useState } from "react"
 import { Spinner } from "../ui/spinner"
 
 import { createAuthClient } from "better-auth/client";
@@ -77,6 +77,7 @@ export function LoginForm({
     if(success){
       toast.success(message as string)
       router.push('/analysis')
+      router.refresh();
       
     }
     else{

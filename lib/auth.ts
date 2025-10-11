@@ -15,7 +15,7 @@ export const auth = betterAuth({
     session: {
         cookieCache: {
             enabled: true,
-            maxAge: 5 * 60 // Cache duration in seconds
+            maxAge: 5 // Cache duration in seconds
         }
     },
     socialProviders: {
@@ -24,6 +24,7 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
         }, 
     },
+
     plugins: [nextCookies()],
 
 });
