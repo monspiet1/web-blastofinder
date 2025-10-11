@@ -137,7 +137,7 @@ export function LoginForm({
             </Field>
           </div>
           <Field>
-            <Button variant="outline" type="submit" className="bg-purple-800 text-white cursor-pointer">
+            <Button variant="outline" type="submit" className="bg-purple-950 text-white cursor-pointer">
               {isLoading ? (
                 <Spinner className="size-4"/> 
               ) : (
@@ -147,7 +147,7 @@ export function LoginForm({
           </Field>
           <FieldSeparator>Ou continue com</FieldSeparator>
           <Field>
-            <Button variant="outline" onClick={signInWithGoogle} type="button" className="bg-purple-800 text-white cursor-pointer">
+            <Button variant="outline" onClick={signInWithGoogle} type="button" className="bg-purple-950 text-white cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 533.5 544.3">
                   <path fill="#4285F4" d="M533.5 278.4c0-17.4-1.6-34.1-4.7-50.4H272v95.4h146.9c-6.3 34-25.2 62.9-53.8 82.1l86.9 67c50.7-46.8 81.5-115.6 81.5-194.1z"/>
                   <path fill="#34A853" d="M272 544.3c72.9 0 134-24.1 178.7-65.6l-86.9-67c-24.1 16.2-55 25.8-91.8 25.8-70.7 0-130.6-47.7-152-111.5l-89.7 69.2c44.7 88.1 136.4 149.1 241.7 149.1z"/>

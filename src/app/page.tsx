@@ -12,6 +12,7 @@ import { LoginForm } from "@/components/custom-ui/LoginForm"
 import { SignUpForm } from "@/components/custom-ui/SignUpForm"
 import { useEffect, useState } from "react"
 import { getOccupations } from "../../server/occupation"
+import { Separator } from "@/components/ui/separator"
 
 
 export default function Home() {
@@ -20,14 +21,14 @@ export default function Home() {
   const [isRegistred, setIsRegistred] = useState("login")
 
   return (
-    <div className="grid min-h-svh lg:grid-cols-2">
+    <div className="grid min-h-screen lg:grid-cols-2 overflow-auto">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
 
           </a>
         </div>
-        <div className="flex flex-1 w-full flex-col gap-6 items-center justify-center">
+        <div className="flex flex-1 w-full flex-col gap-6 items-center justify-center pl-10">
             <Tabs  value={isRegistred} onValueChange={setIsRegistred} className="w-[400px]">
               <div className="flex items-center justify-center">
                 <TabsList>
@@ -45,8 +46,10 @@ export default function Home() {
           
         </div>
       </div>
-      <div className="bg-white relative hidden lg:block ">
-            <div className="w-full h-screen flex items-start justify-start flex-col pb-10 pt-10 rounded-md pr-10 overflow-auto">
+      
+      
+      <div className="bg-white w-auto h-auto">
+            <div className="w-full min-h-screen flex items-start justify-start flex-col rounded-md py-5 px-5 lg:pt-10 lg:px-0 lg:pr-10 relative lg:overflow-auto">
                     <div className="px-5">
                             <h1 className="text-3xl font-bold">O que é o Blastofinder?</h1>
                     </div>
@@ -90,6 +93,7 @@ export default function Home() {
                                 Seu trabalho é essencial para a implementação de políticas de saúde no Brasil e no exterior, refletindo seu compromisso com a promoção da saúde e o enfrentamento de desafios sanitários globais.
                             </p>
                     </div>
+                    
         </div>
       </div>
     </div>
