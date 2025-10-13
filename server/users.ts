@@ -7,6 +7,7 @@ import { db } from "../db/drizzle"
 import { eq, sql } from "drizzle-orm"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
+import { id } from "date-fns/locale"
 
 
 export const signIn = async (email: string, password: string) => {
@@ -77,6 +78,12 @@ export const signOut = async () => {
     redirect("/")
 }
 
+export const getUserId = async (id: any) => {
+    const res = db.select({id: user.id}).from(user).where(eq(user.id, id))
+
+    return res
+
+}
 
 
 

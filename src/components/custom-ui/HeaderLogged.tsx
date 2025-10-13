@@ -17,7 +17,7 @@ import { LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Moon } from "lucide-react"
 
-export default function HeaderLogged({ session }: { session: any }){
+export default function HeaderLogged(){
 
     const router = useRouter()
 
@@ -58,10 +58,10 @@ export default function HeaderLogged({ session }: { session: any }){
                         </NavigationMenu>
                         <div className="flex flex-row">
                             <div className="pr-10 flex items-center justify-center">
-                                <Moon className=" bg-white hover:font-bold cursor-pointer text-purple-950 border-purple-950" />
+                                <Moon className=" bg-white size-7 hover:size-8 cursor-pointer text-purple-950 border-purple-950" />
                             </div>
                             <div>
-                                <LogOut onClick={handleLogout} className=" bg-white hover:font-bold cursor-pointer text-purple-950 border-purple-950"/>
+                                <LogOut onClick={handleLogout} className=" bg-white hover:font-bold cursor-pointer size-7 hover:size-8 text-purple-950 border-purple-950"/>
                             </div>
                         </div>
                 </div>

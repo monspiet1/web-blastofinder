@@ -34,7 +34,7 @@ export default function HeaderNoLogged(){
                             </NavigationMenuList>
                         </NavigationMenu>
                         <div >
-                            <Moon className=" bg-white hover:font-bold cursor-pointer text-purple-950 border-purple-950" />
+                            <Moon className=" bg-white size-7 hover:size-8 cursor-pointer text-purple-950 border-purple-950" />
                         </div>
                 </div>
         </div>

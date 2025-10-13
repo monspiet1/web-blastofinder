@@ -1,6 +1,6 @@
 
 import { relations } from "drizzle-orm"
-import { integer } from "drizzle-orm/gel-core";
+import { sql } from "drizzle-orm";
 import * as pg from "drizzle-orm/pg-core"
 
 // Tabelas
@@ -78,8 +78,23 @@ export const position = pg.pgTable('position', {
 })
 
 export const analysis = pg.pgTable('analysis',{
-    id_analysis: pg.integer().primaryKey(),
-    detected_objects: pg.json().notNull(),
+    id_analysis: pg.uuid().defaultRandom().primaryKey(),
+    detected_objects: pg.json()
+                        .$type<{
+                            prediction: Array<{
+                                x: number,
+                                y: number,
+                                width: number,
+                                height: number,
+                                confidence: number,
+                                class: string,
+                                class_id: number
+                            }>,
+                            image: {
+                                width: number,
+                                height: number
+                            }
+                        }>(),
     dt_creation: pg.timestamp(),
     id_user: pg.text().references(() => user.id)
 })
