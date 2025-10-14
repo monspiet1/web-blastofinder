@@ -1,6 +1,5 @@
 "use client"
 
-import { GalleryVerticalEnd } from "lucide-react"
 import {
   Tabs,
   TabsContent,
@@ -11,12 +10,15 @@ import {
 import { LoginForm } from "@/components/custom-ui/LoginForm"
 import { SignUpForm } from "@/components/custom-ui/SignUpForm"
 import { useEffect, useState } from "react"
-import { getOccupations } from "../../server/occupation"
-import { Separator } from "@/components/ui/separator"
+import { signOut } from "../../lib/auth_client"
+
 
 
 export default function Home() {
-
+  useEffect(() => {
+    // Força logout ao abrir o site
+    signOut()
+  }, [])
 
   const [isRegistred, setIsRegistred] = useState("login")
 

@@ -8,6 +8,7 @@ import { getUserId } from "../../../server/users"
 import { selectAnalysisByUser } from "../../../server/analysis"
 import { useRouter } from "next/navigation"
 import { Spinner } from "@/components/ui/spinner"
+import { Search } from "lucide-react"
 
 import {
   Table,
@@ -26,10 +27,30 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
+
 export default function Analysis(){
   const {data:session, isPending} = useSession()
   const [analyses, setAnalyses] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false)
+
   
   /*
   const handleInsertAnalysis1 = async () =>{
@@ -118,40 +139,78 @@ export default function Analysis(){
   else{
       return(
               <div className="w-full min-h-svh flex justify-center pt-10 pb-20">
-                <div className="flex flex-col items-center w-400 min-h-screen bg-white">
+                <div className="flex flex-col items-center w-full min-h-screen bg-white">
                  {isLoading ? (
                         <Spinner className="size-8"/>
                       ):(
-                        <div className="flex flex-col items-center w-full min-h-screen bg-white">
-                            <Table>
-                            <TableCaption>A list of your recent invoices.</TableCaption>
+                        <div className="flex flex-col items-center justify-center w-full px-20 min-h-screen bg-white">
+                            <div className="w-full h-auto flex justify-start pb-5">
+                              <div className="relative w-auto min-w-sm flex items-center">
+                                  {/* Ícone posicionado dentro do input */}
+                                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 size-4 pointer-events-none" />
+
+                                  <Input
+                                    type="search"
+                                    placeholder="Pesquisar..."
+                                    className="pl-9 w-full placeholder:text-gray-400 h-9"
+                                  />
+                                </div>
+                              <div  className="w-1/3 h-8 flex justify-start pl-2">
+                                  <Select >
+                                    <SelectTrigger className="w-[180px]">
+                                      <SelectValue placeholder="Quantidade" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="light">5</SelectItem>
+                                      <SelectItem value="dark">10</SelectItem>
+                                      <SelectItem value="system">15</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                              </div>
+                              
+                            </div>
+                            <Table >
+                            <TableCaption>
+                              <div className="w-full h-auto px-10 flex justify-center">
+                                <div className="w-auto h-auto ">
+                                    <Pagination>
+                                      <PaginationContent>
+                                        <PaginationItem>
+                                          <PaginationPrevious href="#" />
+                                        </PaginationItem>
+                                        <PaginationItem>
+                                          <PaginationLink href="#">1</PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem>
+                                          <PaginationEllipsis />
+                                        </PaginationItem>
+                                        <PaginationItem>
+                                          <PaginationNext href="#" />
+                                        </PaginationItem>
+                                      </PaginationContent>
+                                    </Pagination>
+                                </div>
+                                
+                              </div>
+                            </TableCaption>
                             <TableHeader>
-                              <TableRow> 
-                                <TableHead className="w-10">ID</TableHead>
-                                <TableHead className="w-30">Nome</TableHead>
-                                <TableHead>Data</TableHead>
-                                <TableHead>Num. objetos detectados</TableHead>
-                                <TableHead className="text-center">Local para o spinner</TableHead>
+                              <TableRow > 
+                                <TableHead className="w-20">ID</TableHead>
+                                <TableHead className="w-40">Nome</TableHead>
+                                <TableHead className="w-40">Data</TableHead>
+                                <TableHead className="w-20">Quantidade</TableHead>
+                                <TableHead className="w-100">Amostra</TableHead>
                               </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {analyses.map((item, index) => (
-                                  <TableRow>
-                                    <TableCell className="font-medium h-auto">{item.id_analysis}</TableCell>
-                                    <TableCell className="font-medium">Nome</TableCell>
-                                    <TableCell>{new Date(item.dt_creation).toLocaleString()}</TableCell>
-                                    <TableCell>Credit Card</TableCell>
-                                    <TableCell className="flex">
-                                      <Accordion type="single" collapsible className="">
-                                        <AccordionItem value="item-1">
-                                          <AccordionContent className="flex justify-center items-center pt-10 pl-10">
-                                            
-                                              <img className="w-60 h-60" src="" alt="" />
-                                            
-                                          </AccordionContent>
-                                          <AccordionTrigger className="flex justify-center"></AccordionTrigger>
-                                        </AccordionItem>
-                                      </Accordion>
+                                  <TableRow >
+                                    <TableCell className="text-center">{index + 1}</TableCell>
+                                    <TableCell className="text-center">Nome da amostra</TableCell>
+                                    <TableCell className="text-center">{new Date(item.dt_creation).toLocaleString()}</TableCell>
+                                    <TableCell className="text-center" >Quantidade de blastos</TableCell>
+                                    <TableCell className="flex justify-center">
+                                        <img className="w-60 h-60"  />
                                     </TableCell>
                                   </TableRow>
                                 ))}

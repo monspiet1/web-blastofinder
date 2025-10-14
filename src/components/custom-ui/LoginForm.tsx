@@ -31,7 +31,7 @@ import {  useState } from "react"
 import { Spinner } from "../ui/spinner"
 
 import { createAuthClient } from "better-auth/client";
-import { getOccupations } from "../../../server/occupation"
+
  
 const formSchema = z.object({ // verifica se os valores inseridos batem para fazer a autenticação correta
   email: z.string().email(),
