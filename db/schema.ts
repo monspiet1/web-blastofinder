@@ -79,6 +79,7 @@ export const position = pg.pgTable('position', {
 
 export const analysis = pg.pgTable('analysis',{
     id_analysis: pg.uuid().defaultRandom().primaryKey(),
+    name: pg.text(),
     detected_objects: pg.json()
                         .$type<{
                             prediction: Array<{

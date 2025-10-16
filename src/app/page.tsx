@@ -23,7 +23,7 @@ export default function Home() {
   const [isRegistred, setIsRegistred] = useState("login")
 
   return (
-    <div className="grid min-h-screen lg:grid-cols-2 overflow-auto">
+    <div className=" grid min-h-screen lg:grid-cols-2 overflow-auto">
       <div className="min-h-screen flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
@@ -50,7 +50,7 @@ export default function Home() {
       </div>
       
       
-      <div className="bg-white min-h-screen h-auto">
+      <div className=" min-h-screen h-auto">
             <div className="w-full min-h-screen flex items-start justify-start flex-col rounded-md pt-5 pb-10 px-5 lg:pt-10 lg:px-0 lg:pr-10 relative lg:overflow-auto">
                     <div className="px-5">
                             <h1 className="text-3xl font-bold">O que é o Blastofinder?</h1>

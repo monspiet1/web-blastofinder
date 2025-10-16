@@ -3,6 +3,7 @@ export {};
 
 declare global {
   type a = {
+    name: string
     detected_objects: {
       prediction: Array<{
         x: number;
